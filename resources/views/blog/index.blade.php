@@ -10,26 +10,29 @@
         </div>
     </div>
 
-    <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
-        <div>
-            <img src="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_960_720.jpg"
-            alt=""
-            class="w-full">
+    @foreach ($posts as $post)
+        <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
+            <div>
+                <img src="{{$post->image_path}}"
+                alt=""
+                class="w-full">
+            </div>
+            <div>
+                <h2 class="text-gray-700 font-bold text-5xl pb-4">
+                    {{$post->title}}
+                </h2>
+
+                <span class="text-gray-500">
+                    By <span class="font-bold italic text-gray-800">{{$post->user->name}}</span>, Created on {{date('jS M Y',strtotime($post->updated_at))}}
+                </span>
+
+                <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">{{$post->description}}</p>
+
+                <a href="{{$post->slug}}" class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
+                    Keep Reading
+                </a>
+            </div>
         </div>
-        <div>
-            <h2 class="text-gray-700 font-bold text-5xl pb-4">
-                Learn how to write Laravel code
-            </h2>
+    @endforeach
 
-            <span class="text-gray-500">
-                By <span class="font-bold italic text-gray-800">Jesús Agudo</span>, 1 day ago
-            </span>
-
-            <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ducimus blanditiis possimus enim itaque perspiciatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, modi?</p>
-
-            <a href="{{}}" class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
-                Keep Reading
-            </a>
-        </div>
-    </div>
-@endsection
+    @endsection
