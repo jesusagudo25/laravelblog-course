@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PagesController::class, 'index'])->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::resource('/blog', PostsController::class);
 
-Auth::routes();
+Route::put('/blog/image/{blog}', [PostsController::class,'updateImage'])->name('blog.updateimage');
 
-//Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();

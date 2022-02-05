@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('script')
+    <script src="{{ asset('js/form.js') }}" defer></script>
+@endsection
+
 @section('content')
 
     <div class="w-4/5 m-auto text-center">
@@ -30,11 +34,35 @@
 
     @foreach ($posts as $post)
         <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
-            <div>
+            <figure class="max-w-full max-h-72 relative">
                 <img src="{{asset('images/'.$post->image_path)}}"
                 alt=""
-                class="w-full">
-            </div>
+                class="w-full h-full bg-center bg-no-repeat object-none rounded-md">
+                @if(isset(Auth::user()->id) && Auth::user()->id == $post->user_id)
+                    <div class="info rounded-md">
+                        <form
+                            action="{{route('blog.updateimage',$post->slug)}}"
+                            method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="bg-grey-lighter pt-15">
+                                <label
+                                class="flex flex-col items-center p-1 text-white cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                <input
+                                    type="file"
+                                    name="image"
+                                    class="hidden">
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                @endif
+            </figure>
             <div>
                 <h2 class="text-gray-700 font-bold text-5xl pb-4">
                     {{$post->title}}
@@ -71,4 +99,8 @@
         </div>
     @endforeach
 
-    @endsection
+    <div class="w-4/5 mx-auto pt-15">
+        {{$posts->links()}}
+    </div>
+
+@endsection
