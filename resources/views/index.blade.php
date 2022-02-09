@@ -17,25 +17,25 @@
 
     <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
         <div>
-            <img src="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_960_720.jpg"
+            <img src="{{asset('images/'.$lastPostLastUser->image_path)}}"
             alt=""
             class="w-full">
         </div>
 
         <div class="m-auto sm:m-auto text-left w-4/5 block">
             <h2 class="text-4xl font-extrabold text-gray-600">
-                Struggling to be a better web developer?
+                {{$lastPostLastUser->title}}
             </h2>
 
             <p class="py-8 text-gray-500 text-lg">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, voluptatibus.
+                {{$lastPostLastUser->name}}
             </p>
 
             <p class="font-extrabold text-gray-600 text-base pb-9">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo consectetur, maiores necessitatibus numquam in aliquam alias neque eveniet assumenda veritatis vero modi ad culpa quam vel dolor obcaecati. A, provident!
+                {{Str::limit($lastPostLastUser->description,200)}}
             </p>
 
-            <a href="{{route('blog.index')}}"
+            <a href="{{route('blog.show',$lastPostLastUser->slug)}}"
                 class="uppercase bg-blue-500 text-gray-100 text-base font-extrabold py-3 px-8 rounded-3xl">
                 Find Out More
             </a>
@@ -86,10 +86,14 @@
                 </span>
 
                 <h3 class="text-xl font-bold py-10">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste molestiae veritatis maiores libero porro dolorum unde laborum quaerat ipsa deserunt, sint asperiores ipsum illo consequatur!
+                    {{$lastPostCreated->title}}
                 </h3>
 
-                <a href=""
+                <p class="font-extrabold text-base pb-9">
+                    {{Str::limit($lastPostCreated->description,200)}}
+                </p>
+
+                <a href="{{route('blog.show',$lastPostCreated->slug)}}"
                     class="uppercase bg-transparent border-2 border-gray-100 text-gray-100 text-sm font-extrabold py-3 px-5 rounded-3xl">
                     Find Out More
                 </a>
@@ -97,7 +101,7 @@
 
         </div>
             <div>
-                <img src="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_960_720.jpg"
+                <img src="{{asset('images/'.$lastPostCreated->image_path)}}"
                 alt=""
                 class="w-full">
             </div>
