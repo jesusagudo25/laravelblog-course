@@ -5,7 +5,7 @@ file = document.querySelectorAll('input[type="file"]');
 if(file.length > 1){
     file.forEach(element => {
         element.addEventListener('change', evt => {
-            form.submit();
+            evt.target.parentElement.parentElement.parentElement.submit();
         });
     });
 }
